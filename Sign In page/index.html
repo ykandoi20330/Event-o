@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <title>Sign In Page - EVENTO</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./images/Evento (2).svg">
+
+</head>
+<body id="bg">
+    <div class="sign-up-form" >
+        <img src="./images/Evento (2).svg" width="50px" height="50px">
+        <h1> EVENTO </h1>
+        <form> <div id="messageOfLoginPage"></div>
+            <input type="email" class="input-box" placeholder="Your Email" required>
+            <br>
+            <input type="password" class="input-box" placeholder="Your Password" required>
+            <br><br>
+
+            <button type="button" id="loginBtn" class="signup-btn">Log in</button>
+            <hr>
+            <p class="or">OR</p>
+            <button type="button" style="display: none;"  class="google-btn"> <a style="color: white;" href="./loginWithGoogle.html">Log in with Google</a> </button>
+            <p> Don't have an account ? <a href="./signup.html" id="up">Sign up</a></p>
+
+
+            
+
+        </form>
+
+        <script src="indexLogin.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script> 
+          let btn=document.querySelector("#loginBtn");
+          btn.addEventListener('click',async function(e){ 
+               
+             // e.preventDefault();
+              let email=document.querySelector("input[type='email']").value;
+                    let password=document.querySelector("input[type='password']").value;
+                 console.log(email,password);
+             await axios.post('/Sign%20In%20page/index.html',{'email':email,'password':password}).then(
+               fetch(window.location.href)).then(data=> document.getElementById('messageOfLoginPage').innerHTML=data.data.message);
+               document.getElementById('messageOfLoginPage').style.color='darkblue'
+               reloadToHomePage();
+          })
+         function reloadToHomePage () {
+             setTimeout(() => {  
+                  console.log((window.location.href).replace('/Sign%20In%20page/index.html',''));
+             window.location.assign((window.location.href).replace('/Sign%20In%20page/index.html',''));
+             }, 2000);
+            
+         }
+        </script> 
+    </div>
+
+
+
+
+
+
+</body>
+</html>
